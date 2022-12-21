@@ -1,15 +1,15 @@
 const { ethers } = require('ethers');
+require('dotenv').config();
 const provider = require('./provider');
 
 // Set the address of the account that you want to send the transaction from
-const fromAddress = '0x4Acd02010399a2D1C20ff611eD82a0cD42b7Ea87';
+const fromAddress = process.env.FROM_ADDRESS;
 
 // Set the address of the account that you want to send the transaction to
-const toAddress = '0x4765027f9E6C7a9118a63BE16C985c7368B55AD9';
+const toAddress = process.env.TO_ADDRESS;
 
-const privateKey1 =
-  'e191c8d6a78797693d6ab86a56533e5e44d6a8fe2b320d23e4fdc70690bfc99c'; // Private key of account 1
-const wallet = new ethers.Wallet(privateKey1, provider);
+const privateKey = process.env.PRIVATE_KEY; // Private key of account 1
+const wallet = new ethers.Wallet(privateKey, provider);
 
 function etherToWei(ether) {
   return ether * Math.pow(10, 18);
@@ -31,17 +31,17 @@ const main = async (from, to) => {
   );
 
   // Set the amount of Ether to send (in wei)
-  const amount = ethers.utils.parseEther('.0002');
+  const amount = ethers.utils.parseEther('.04');
 
   // Calculate the network fee for the transaction
   provider
     .estimateGas({ from: fromAddress, to: toAddress, value: amount })
     .then((gasEstimate) => {
       console.log(
-        `The estimated gas cost for this transaction is: ${gasEstimate} wei`
+        `The estimated gas cost for this transaction is ${gasEstimate} wei`
       );
       console.log(
-        `The estimated network fee for this transaction is: ${ethers.utils.formatEther(
+        `The estimated network fee for this transaction is ${ethers.utils.formatEther(
           gasEstimate
         )} ETH`
       );
@@ -51,15 +51,15 @@ const main = async (from, to) => {
     });
 
   const tx = await wallet.sendTransaction({
-    to: account2,
+    to: toAddress,
     value: amount,
   });
 
   await tx.wait();
   console.log(tx);
 
-  const senderBalanceAfter = await provider.getBalance(from);
-  const recieverBalanceAfter = await provider.getBalance(to);
+  const senderBalanceAfter = await provider.getBalance(fromAddress);
+  const recieverBalanceAfter = await provider.getBalance(toAddress);
 
   console.log(
     `\nSender balance after: ${ethers.utils.formatEther(

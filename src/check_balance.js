@@ -1,11 +1,8 @@
 const ethers = require('ethers');
+require('dotenv').config();
+
 const provider = require('./provider');
-const mnemonic =
-  'yellow truly boil elegant hunt raven abstract tail view real gasp doll';
-
-const walletMnemonic = ethers.Wallet.fromMnemonic(mnemonic);
-
-const wallet = walletMnemonic.connect(provider);
+const address = process.env.ADDRESS;
 
 const getBalance = async (address) => {
   const balance = await provider.getBalance(address);
