@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",
+    "@solana/web3.js": "^1.72.0",
     "axios": "^1.2.1",
     "bip32": "^3.1.0",
     "bip39": "^3.0.4",
@@ -19,7 +20,6 @@
     "ethers": "^5.7.2",
     "hdkey": "^2.0.1",
     "request": "^2.88.2",
-    "tiny-secp256k1": "^2.2.1",
     "web3": "^1.8.1"
   },
   "devDependencies": {
