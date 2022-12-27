@@ -14,14 +14,6 @@ async function main() {
     console.log(`Litecoin address: ${liteAddress}`);
     const DogeAddress = await resolver.getAddress(3);
     console.log(`Dogecoin address: ${DogeAddress}`);
-    for (let i = 100; i < 150; i++) {
-      try {
-        const add = await resolver.getAddress(i);
-        console.log(`address ${i}: ${add}`);
-      } catch (error) {
-        console.log(`Error ${i}: ${error.errorMessage}`);
-      }
-    }
 
     // const monaAddress = await resolver.getAddress(22);
     // const ethClassicAddress = await resolver.getAddress(61);

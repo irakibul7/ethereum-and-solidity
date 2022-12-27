@@ -1,14 +1,25 @@
 const bip39 = require('bip39');
 const bitcoin = require('bitcoinjs-lib');
-const bip32 = require('bip32');
-const HDKey = require('hdkey');
+const { BIP32Factory } = require('bip32');
+const ecc = require('tiny-secp256k1');
+require('dotenv').config();
+// You must wrap a tiny-secp256k1 compatible implementation
+const bip32 = BIP32Factory(ecc);
 const mnemonic = process.env.MNEMONIC_PHARSE;
 const seed = bip39.mnemonicToSeedSync(mnemonic);
-console.log(seed);
-const hdkey = HDKey.fromMasterSeed(Buffer.from(seed), 'hex');
-console.log(hdkey._privateKey);
-const node = bip32.fromBase58(
-  'xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi'
-);
-let child = node.derivePath('m/0/0');
-console.log(child);
+
+// Address using bip44 derivation path
+const keypair1 = bip32.fromSeed(seed).derivePath("m/44'/0'/0'/0/0");
+const bip44_address = bitcoin.payments.p2pkh({
+  pubkey: keypair1.publicKey,
+}).address;
+
+console.log(`Address using bip44: ${bip44_address}`);
+
+// Address using bip84 derivation path
+const keypair2 = bip32.fromSeed(seed).derivePath("m/84'/0'/0'/0/0");
+const bip84_address = bitcoin.payments.p2wpkh({
+  pubkey: keypair2.publicKey,
+}).address;
+
+console.log(`Address using bip84: ${bip84_address}`);
