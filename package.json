@@ -13,6 +13,7 @@
     "@openzeppelin/contracts": "^4.7.3",
     "@solana/web3.js": "^1.72.0",
     "axios": "^1.2.1",
+    "bchaddrjs": "^0.5.2",
     "bip32": "^3.1.0",
     "bip39": "^3.0.4",
     "bitcoinjs-lib": "^6.1.0",
