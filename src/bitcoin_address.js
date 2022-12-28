@@ -32,3 +32,6 @@ const bip145_address = bitcoin.payments.p2pkh({
 const toCashAddress = bchaddr.toCashAddress;
 const cashAddress = toCashAddress(bip145_address);
 console.log(`Bitcoin Cash Address: ${cashAddress}`);
+const toLegacyAddress = bchaddr.toLegacyAddress;
+const cashLegacyAddress = toLegacyAddress(bip44_address);
+console.log(`Bitcoin Legacy Address: ${cashLegacyAddress}`);
