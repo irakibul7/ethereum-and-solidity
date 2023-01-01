@@ -12,7 +12,7 @@ const web3 = new Web3(
 );
 
 // Convert 1 ether to wei
-const value = web3.utils.toWei('1', 'ether');
+const value = web3.utils.toWei('.0021', 'ether');
 
 // Create an instance of the contract
 const contract = new web3.eth.Contract(contractAbi, contractAddress);
