@@ -8,6 +8,7 @@ const {
 } = require('./utils');
 
 const main = async () => {
+  console.log(tokenIdFrom('rakib.swop.eth'));
   const dictionaryName = process.argv[2];
   if (!dictionaryName) throw 'Unspecified dictionary filename';
   const words = loadFromDictionary(dictionaryName);

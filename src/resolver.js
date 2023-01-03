@@ -1,5 +1,6 @@
+const ENS = require('@ensdomains/ensjs').default;
+const { getEnsAddress } = require('@ensdomains/ensjs');
 const { ethers } = require('ethers');
-const { ENS, getEnsAddress } = require('@ensdomains/ensjs');
 
 require('dotenv').config();
 const API_KEY = process.env.INFURA_ID_MAINNET;
@@ -8,17 +9,25 @@ const provider = new ethers.providers.JsonRpcProvider(url);
 async function main() {
   let resolver = await provider.resolveName('swop.eth');
 
-  const ens = new ENS({
-    provider,
-    ensAddress: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
-  });
-  await ens.setProvider(provider);
+  const ens = new ENS({ provider, ensAddress: getEnsAddress('1') });
 
-  var balance = await provider.getBalance('swop.eth');
-  var eth = ethers.utils.formatEther(balance);
-  var dollar = eth * 1196.89;
+  const address = await ens.name('swop.eth').createSubdomain('rakib');
+  console.log(address);
 
-  console.log(eth);
-  console.log(dollar);
+  // const transaction = await ENSInstance.setSubnodeOwner(
+  //   ethers.utils.namehash(domain),
+  //   ethers.utils.keccak256(ethers.utils.toUtf8Bytes(subdomain)),
+  //   '0xbA5847FCc7E029070435729Ef1b2B06dF93CEa23'
+  // );
+
+  // await transaction.wait();
+  // console.log(`Successfully added ${subdomain}.${domain} to ENS.`);
+
+  // var balance = await provider.getBalance('swop.eth');
+  // var eth = ethers.utils.formatEther(balance);
+  // var dollar = eth * 1196.89;
+
+  // console.log(eth);
+  // console.log(dollar);
 }
 main();

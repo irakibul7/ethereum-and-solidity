@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@ensdomains/ens-contracts": "^0.0.15",
-    "@ensdomains/ensjs": "^3.0.0-alpha.39",
+    "@ensdomains/ensjs": "^2.1.0",
     "@openzeppelin/contracts": "^4.7.3",
     "@solana/web3.js": "^1.72.0",
     "axios": "^1.2.1",
