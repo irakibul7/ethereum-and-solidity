@@ -27,20 +27,14 @@ const contract = new ethers.Contract(
   provider.mainnet
 );
 const main = async () => {
-  const name = await contract.name();
-  const symbol = await contract.symbol();
-  const totalSupply = await contract.totalSupply();
+  const latestBlock = await provider.mainnet.getBlockNumber();
 
-  console.log(`\nToken Address ${address}\n`);
-  console.log(`Name : ${name}`);
-  console.log(`Symbol : ${symbol}`);
-  console.log(`Total Supply : ${totalSupply}\n`);
-
-  const balance = await contract.balanceOf(walletAddress);
-
-  console.log(
-    `Balance of ${walletAddress} in ${name} : ${weiToEth(balance)}`
+  const transferEvents = await contract.queryFilter(
+    'Transfer',
+    latestBlock - 2,
+    latestBlock
   );
+  console.log(transferEvents);
 };
 
 main();

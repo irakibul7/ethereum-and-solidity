@@ -30,23 +30,6 @@ const main = async () => {
   console.log(`\nReading from ${address}`);
   console.log(`Balance of sender: ${balance}\n`);
 
-  // Calculate the network fee for the transaction
-  // provider
-  //   .estimateGas({ from: fromAddress, to: toAddress, value: balance })
-  //   .then((gasEstimate) => {
-  //     console.log(
-  //       `The estimated gas cost for this transaction is ${gasEstimate} wei`
-  //     );
-  //     console.log(
-  //       `The estimated network fee for this transaction is ${weiToEth(
-  //         gasEstimate
-  //       )} ETH`
-  //     );
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-
   const contractWithWallet = contract.connect(walletSigner);
   const tx = await contractWithWallet.transfer(toAddress, balance);
   await tx.wait();
