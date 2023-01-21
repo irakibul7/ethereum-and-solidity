@@ -3,7 +3,7 @@ require('dotenv').config();
 
 // create a new random account
 const wallet = ethers.Wallet.createRandom();
-
+console.log(wallet);
 // 12 words mnemonic phrase
 const mnemonic = wallet.mnemonic.phrase;
 

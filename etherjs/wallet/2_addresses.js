@@ -1,6 +1,5 @@
 const ethers = require('ethers');
 require('dotenv').config();
-
 const HDNode = require('../utils/hd_node');
 
 const createAccount = (n) => {
