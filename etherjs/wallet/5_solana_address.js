@@ -4,7 +4,7 @@ const bip32 = require('bip32');
 const { derivePath } = require('ed25519-hd-key');
 const nacl = require('tweetnacl');
 require('dotenv').config();
-const mnemonic = process.env.MNEMONIC_PHARSE;
+const mnemonic = process.env.MNEMONIC_PHRASE;
 const seed = bip39.mnemonicToSeedSync(mnemonic);
 
 const DERIVATION_PATH = {

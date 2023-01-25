@@ -8,7 +8,8 @@ require('dotenv').config();
 // wrap a tiny-secp256k1 compatible implementation
 const bip32 = BIP32Factory(ecc);
 
-const mnemonic = process.env.MNEMONIC_PHARSE;
+const mnemonic = process.env.MNEMONIC_PHRASE;
+console.log(mnemonic);
 const seed = bip39.mnemonicToSeedSync(mnemonic);
 
 // Address using bip44 derivation path
